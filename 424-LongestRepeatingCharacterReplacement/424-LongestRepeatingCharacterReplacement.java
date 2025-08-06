@@ -1,38 +1,34 @@
-// Last updated: 7/23/2025, 10:53:58 PM
+// Last updated: 8/6/2025, 11:12:10 PM
 class Solution {
     public int characterReplacement(String s, int k) {
-
-        int maxLen = 0;
-        int start = 0;
-        int repeatCount = 0;
         
         Map<Character, Integer> map = new HashMap<>();
+        int len = 0, maxLen = 0, maxRepeat = 0;
+        int start = 0;
 
-        for(int end = 0; end < s.length(); end++){
-
-            char ch = s.charAt(end);
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
 
             map.put(ch, map.getOrDefault(ch, 0)+1);
+            maxRepeat = Math.max(maxRepeat, map.get(ch));
 
-            repeatCount = Math.max(repeatCount, map.get(ch));
+            len++;
+      
+           
+            while(i - start- maxRepeat+1> k){
+                char startCh = s.charAt(start);
                 
-            while(end - start + 1 - repeatCount > k){
-
-                char leftCh = s.charAt(start);
-
-                map.put(leftCh, map.get(leftCh)-1);
-
+                map.put(startCh, map.get(startCh)-1);
+                len--;
                 start++;
-
+                
             }
-
-            maxLen = Math.max(maxLen, end - start+1);
-
+                   maxLen = Math.max(len, maxLen);
         }
 
-    
 
         return maxLen;
+
 
     }
 }
