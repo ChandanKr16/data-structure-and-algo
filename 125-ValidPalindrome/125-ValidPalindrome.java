@@ -1,36 +1,32 @@
-// Last updated: 7/23/2025, 10:54:24 PM
+// Last updated: 8/12/2025, 8:19:29 PM
 class Solution {
     public boolean isPalindrome(String s) {
+        s = s.toLowerCase();
 
-      
-        int start = 0;
-        int end = s.length()-1;
+        int left = 0;
+        int right = s.length()-1;
 
-        while(start < end){
+        while(left < right){
 
-            char startCh = Character.toLowerCase(s.charAt(start));
-            char endCh = Character.toLowerCase(s.charAt(end));
+            char leftCh = s.charAt(left);
+            char rightCh = s.charAt(right);
 
-            while(start < s.length()-1 && !Character.isLetterOrDigit(startCh)){
-                start++;
-                startCh = Character.toLowerCase(s.charAt(start));
+            if(!Character.isLetterOrDigit(leftCh)){
+                left++;
             }
-
-            while(end > 0 && !Character.isLetterOrDigit(endCh)){
-                end--;
-                endCh = Character.toLowerCase(s.charAt(end));
+            else if(!Character.isLetterOrDigit(rightCh)){
+                right--;
             }
-
-
-         if(Character.isLetterOrDigit(endCh) && Character.isLetterOrDigit(startCh) && startCh != endCh)
+            else if(leftCh != rightCh){
                 return false;
-
-            start++;
-            end--;
+            }
+            else{
+                left++;
+                right--;
+            }
         }
 
         return true;
-
 
     }
 }
