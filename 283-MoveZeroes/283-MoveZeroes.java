@@ -1,8 +1,8 @@
-// Last updated: 8/12/2025, 8:30:34 PM
+// Last updated: 8/12/2025, 8:30:43 PM
 class Solution {
     public void moveZeroes(int[] nums) {
 
-        if(nums.length <= 1) return;
+     //   if(nums.length <= 1) return;
 
         int insertPointer = 0;
         int i = 0;
