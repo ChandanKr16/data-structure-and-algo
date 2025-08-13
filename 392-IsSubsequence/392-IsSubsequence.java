@@ -1,15 +1,13 @@
-// Last updated: 8/13/2025, 10:40:47 PM
+// Last updated: 8/13/2025, 10:47:52 PM
 class Solution {
     public boolean isSubsequence(String s, String t) {
         
         int count = 0;
         int j = 0;
+        int i = 0;
 
-        if(s.length() == 0) return true;
-
-        for(int i = 0; i < t.length(); i++){
-
-            if(count == s.length()) return true;
+        while(i < t.length() && j < s.length()){
+            
 
             char tChar = t.charAt(i);
             char sChar = s.charAt(j);
@@ -18,6 +16,7 @@ class Solution {
                 j++;
                 count++;
             }
+            i++;
 
         }
 
