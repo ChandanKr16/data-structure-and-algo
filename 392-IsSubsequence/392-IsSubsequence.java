@@ -1,17 +1,23 @@
-// Last updated: 7/23/2025, 10:54:00 PM
+// Last updated: 8/13/2025, 10:40:47 PM
 class Solution {
     public boolean isSubsequence(String s, String t) {
-        int start = 0;
-        int end = 0;
+        
         int count = 0;
+        int j = 0;
 
-        while(start < s.length() && end < t.length()){
-            
-            if(s.charAt(start) == t.charAt(end)){
+        if(s.length() == 0) return true;
+
+        for(int i = 0; i < t.length(); i++){
+
+            if(count == s.length()) return true;
+
+            char tChar = t.charAt(i);
+            char sChar = s.charAt(j);
+
+            if(tChar == sChar){
+                j++;
                 count++;
-                start++;
             }
-            end++;
 
         }
 
