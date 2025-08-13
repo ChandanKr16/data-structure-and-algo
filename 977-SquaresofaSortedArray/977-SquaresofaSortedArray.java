@@ -1,28 +1,25 @@
-// Last updated: 8/12/2025, 7:50:49 PM
+// Last updated: 8/13/2025, 7:45:33 PM
 class Solution {
     public int[] sortedSquares(int[] nums) {
         int sortedArr[] = new int[nums.length];
 
-        int i = nums.length -1;
-        int left = 0;
-        int right = nums.length -1 ;
+
+        int left = 0, right = nums.length-1, i = nums.length-1;
 
         while(left <= right){
+            int leftSq = nums[left] * nums[left];
+            int rightSq = nums[right] * nums[right];
 
-            int sqLeft = nums[left] * nums[left];
-            int sqRight = nums[right] * nums[right];
-
-            if(sqLeft > sqRight){
-                sortedArr[i] = sqLeft;
+            if(leftSq > rightSq){
+                sortedArr[i--] = leftSq;
                 left++;
             }
             else{
-                sortedArr[i] = sqRight;
+                sortedArr[i--] = rightSq;
                 right--;
             }
-            i--;
         }
-
+     
 
         return sortedArr;
     }
