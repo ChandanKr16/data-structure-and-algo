@@ -1,57 +1,45 @@
-// Last updated: 8/13/2025, 8:44:38 PM
+// Last updated: 8/13/2025, 8:45:26 PM
 class Solution {
-    public List<List<Integer>> threeSum(int[] arr) {
-        //-4 -1 -1 0 1 2
+    public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
 
-        Arrays.sort(arr);
-        int last = arr.length-1;
-        int start = 1;
+        Arrays.sort(nums);
+        int left = 0;
+        int right = nums.length-1;
 
-        for(int i = 0; i < arr.length; i++){
-
-            if(i > 0 && arr[i] == arr[i-1])
+        for(int i = 0; i < nums.length; i++){
+            if(i > 0 && nums[i] == nums[i-1])
                 continue;
-
-            start = i+1;
-           last = arr.length-1;
-
             
-            while(start < last){
+            left = i+1;
+            right = nums.length-1;
 
-                int sum = arr[start] + arr[i] + arr[last];
+            while(left < right){
+
+                int sum = nums[i] + nums[left] + nums[right];
 
                 if(sum > 0){
-                    last--;
+                    right--;
                 }
                 else if(sum < 0){
-                    start++;
+                    left++;
                 }
                 else{
+                    result.add(List.of(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
 
-                    result.add(new ArrayList<>(List.of(arr[i], arr[start], arr[last])));
 
-                    start++;
-                    last--;
-
-                while(start < last && arr[start] == arr[start-1]){
-                    start++;
-                }
-
-                while(start < last && arr[last] == arr[last+1]){
-                    last--;
+                    while(left < right && nums[left] == nums[left-1]) left++;
+                    while(right > left && nums[right] == nums[right+1]) right--;
                 }
 
             }
 
-            }
-            
-
-            
-            
         }
 
-        return result;   
+
+        return result;        
 
     }
 }
