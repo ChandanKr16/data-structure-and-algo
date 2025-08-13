@@ -1,4 +1,4 @@
-// Last updated: 8/12/2025, 8:30:54 PM
+// Last updated: 8/13/2025, 7:41:02 PM
 class Solution {
     public void moveZeroes(int[] nums) {
 
@@ -10,10 +10,11 @@ class Solution {
             if(nums[i] != 0){
                 int temp = nums[insertPointer];
                 nums[insertPointer++] = nums[i];
-                nums[i] = temp;                 
+                nums[i] = temp;
             }
             i++;
 
         }
+
     }
 }
