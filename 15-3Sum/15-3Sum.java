@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 8:45:26 PM
+// Last updated: 8/13/2025, 8:45:54 PM
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -7,7 +7,7 @@ class Solution {
         int left = 0;
         int right = nums.length-1;
 
-        for(int i = 0; i < nums.length; i++){
+        for(int i = 0; i < nums.length-2; i++){
             if(i > 0 && nums[i] == nums[i-1])
                 continue;
             
