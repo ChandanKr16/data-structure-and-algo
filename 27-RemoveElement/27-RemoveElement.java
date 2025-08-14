@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 9:37:57 PM
+// Last updated: 8/14/2025, 10:25:13 PM
 class Solution {
     public int removeElement(int[] nums, int val) {
         int insertPointer = 0;
@@ -6,12 +6,13 @@ class Solution {
         int count = 0;
 
         while(i < nums.length){
+
             if(nums[i] != val){
-                
                 nums[insertPointer++] = nums[i];
                 count++;
             }
             i++;
+
         }
 
         return count;
