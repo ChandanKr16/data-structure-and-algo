@@ -1,4 +1,4 @@
-// Last updated: 7/23/2025, 10:54:43 PM
+// Last updated: 8/15/2025, 12:01:27 AM
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -11,57 +11,53 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
         if(list1 == null) return list2;
         if(list2 == null) return list1;
-
+        
+        ListNode mergedList = new ListNode();
         ListNode head = null;
-        ListNode last = null;
 
         while(list1 != null && list2 != null){
 
             if(list1.val > list2.val){
-
-                ListNode newNode = new ListNode(list2.val);
-
-                if(head == null){
-                    head = newNode;
-                    last = newNode;
-                }
-                else{
-                    last.next = newNode;
-                    last = newNode;
-                }
-
+                mergedList.next = list2;
                 list2 = list2.next;
 
-
-            } 
-            else{
-                ListNode newNode = new ListNode(list1.val);
                  if(head == null){
-                    head = newNode;
-                    last = newNode;
-                }
-                else{
-                    last.next = newNode;
-                    last = newNode;
+                    head = mergedList;
+                    head = mergedList.next;
                 }
 
-                list1 = list1.next;
+                mergedList = mergedList.next;
+
             }
-
+            else {
+                
+                mergedList.next  = list1;
+                list1 = list1.next;
+                 if(head == null){
+                    head = mergedList;
+                     head = mergedList.next;
+                }
+                mergedList = mergedList.next;
+            }
+            
 
         }
 
         if(list1 != null){
-            last.next = list1;
+            mergedList.next = list1;
         }
 
-        if(list2 != null){
-            last.next = list2;
+       else{
+            mergedList.next = list2;
         }
+
+
 
         return head;
+
 
     }
 }
