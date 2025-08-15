@@ -1,32 +1,31 @@
-// Last updated: 7/23/2025, 10:54:35 PM
+// Last updated: 8/15/2025, 1:06:45 PM
 class Solution {
     public int trap(int[] height) {
+        
+        int leftPrefix[] = new int[height.length];
+        int rightPrefix[] = new int[height.length];
+        leftPrefix[0] = height[0];
+        rightPrefix[height.length-1] = height[height.length-1];
 
-        int leftArr[] = new int[height.length];
-        int rightArr[] = new int[height.length];
-
-        leftArr[0] = height[0];
-        rightArr[height.length-1] = height[height.length-1];
-
-        for(int i = 1; i < height.length; i++){
-            leftArr[i] = Math.max(leftArr[i-1], height[i]);
+        int trappedWater = 0;
+        
+        for(int i = 1; i < leftPrefix.length; i++){
+            leftPrefix[i] = Math.max(leftPrefix[i-1], height[i]);
         }
 
-        for(int i = height.length-2; i >= 0; i-- ){
-            rightArr[i] = Math.max(rightArr[i+1], height[i]);
+        for(int i = height.length-2; i >= 0; i--){
+            rightPrefix[i] = Math.max(rightPrefix[i+1], height[i]);
         }
-
-
-        int water = 0;
 
         for(int i = 0; i < height.length; i++){
 
-            water += Math.min(leftArr[i], rightArr[i]) - height[i];
+            trappedWater += Math.min(rightPrefix[i], leftPrefix[i]) - height[i];
 
         }
 
+
         
-        
-        return water;
+
+        return trappedWater;
     }
 }
