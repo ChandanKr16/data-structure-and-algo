@@ -1,4 +1,4 @@
-// Last updated: 8/15/2025, 9:16:16 AM
+// Last updated: 8/16/2025, 7:58:57 PM
 class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
 
@@ -11,11 +11,9 @@ class Solution {
             if(i > 0 && nums[i] == nums[i-1]) continue;
 
             for(int j = i+1; j < nums.length; j++){
-
                 if(j > i+1 && nums[j] == nums[j-1]) continue;
-                
-                int left = j+1;
-                int right = nums.length-1;
+
+                int left = j + 1, right = nums.length-1;
 
                 while(left < right){
                     long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
@@ -27,18 +25,13 @@ class Solution {
                         left++;
                     }
                     else{
-
                         result.add(List.of(nums[i], nums[j], nums[left], nums[right]));
                         left++;
                         right--;
-
                         while(left < right && nums[left] == nums[left-1]) left++;
-                        
                         while(left < right && nums[right] == nums[right+1]) right--;
                     }
-
                 }
-
             }
         }
 
