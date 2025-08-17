@@ -1,23 +1,23 @@
-// Last updated: 8/13/2025, 7:33:40 PM
+// Last updated: 8/17/2025, 7:33:44 AM
 class Solution {
     public int removeDuplicates(int[] nums) {
         
-        int insertPointer = 1;
-        int i = 1;
         int count = 1;
+        int insertPointer = 1;
 
-        while(i < nums.length){
+
+        for(int i = 1; i < nums.length; i++){
 
             if(nums[i] != nums[i-1]){
                 nums[insertPointer++] = nums[i];
                 count++;
             }
+           // i++;
 
-            i++;
         }
 
-
         return count;
+
 
     }
 }
