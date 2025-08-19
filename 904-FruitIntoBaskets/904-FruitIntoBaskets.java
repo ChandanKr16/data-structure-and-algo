@@ -1,32 +1,34 @@
-// Last updated: 8/19/2025, 8:10:05 PM
+// Last updated: 8/19/2025, 8:19:26 PM
 class Solution {
     public int totalFruit(int[] fruits) {
-
-        int maxCount = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        int count = 0;
+        
+        Map<Integer, Integer> freq = new HashMap<>();
         int start = 0;
+        int count = 0;
+        int maxCount = 0;
 
         for(int i = 0; i < fruits.length; i++){
-            map.put(fruits[i], map.getOrDefault(fruits[i], 0)+1);
+            freq.put(fruits[i], freq.getOrDefault(fruits[i], 0)+1);
+
             count++;
 
-            if(map.size() <= 2){
-                maxCount = Math.max(maxCount, count);
-            }    
-
-            while(map.size() > 2){
-                
-                map.put(fruits[start], map.get(fruits[start])-1);
+            if(freq.size() > 2){
+               
+                int fruit = fruits[start++];
+               
                 count--;
 
-                if(map.get(fruits[start]) == 0){
-                    map.remove(fruits[start]);
-                }
-                start++;
-            }        
+                freq.put(fruit, freq.get(fruit)-1);
+                
+                if(freq.get(fruit) == 0){
+                    freq.remove(fruit);
+               }
+            }
+
+            maxCount = Math.max(count, maxCount);
         }
 
-        return maxCount;
+        return maxCount;       
+
     }
 }
