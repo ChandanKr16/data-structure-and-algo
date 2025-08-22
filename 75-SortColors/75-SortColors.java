@@ -1,52 +1,61 @@
-// Last updated: 8/22/2025, 8:00:41 PM
+// Last updated: 8/22/2025, 8:07:36 PM
 class Solution {
+    public String minWindow(String s, String t) {
 
-    public String minWindow(String str, String pattern) {
+        int left = 0;
+        int right = 0;
+        int count = 0;
+        int startI = s.length();
+        int endI = Integer.MAX_VALUE;
         int minLen = Integer.MAX_VALUE;
-        int start = 0;
-        int startIdx = 0;
-        int matched = 0;
 
+        Map<Character, Integer> freq = new HashMap<>();
         Map<Character, Integer> map = new HashMap<>();
 
-        for(char ch : pattern.toCharArray()){
-            map.put(ch, map.getOrDefault(ch, 0)+1);
-        }
+        for(char ch : t.toCharArray()){
+            freq.put(ch, freq.getOrDefault(ch, 0)+1);
+        } 
 
-                    Map<Character, Integer> map2 = new HashMap<>();
+        while(right < s.length()){
 
-       
-        for(int end = 0; end < str.length(); end++){
-            char ch = str.charAt(end);
+            char ch = s.charAt(right);
 
+           map.put(ch, map.getOrDefault(ch, 0)+1);
 
-            map2.put(ch, map2.getOrDefault(ch, 0)+1);
-
-            if(map.containsKey(ch) && map2.get(ch).intValue() == map.get(ch).intValue()){
-                matched++;
+            if(freq.containsKey(ch)){
+                 
+                if(map.get(ch).intValue() == freq.get(ch).intValue()){
+                    count++;
+                }
             }
 
-            while(matched == map.size()){
+           
+            while(count == freq.size()){
 
-                if(end - start + 1 < minLen){
-                    minLen = Math.min(end-start+1, minLen);
-                    startIdx = start;
-                }
+                    if(right - left + 1 < minLen){ 
+                        startI = left;
+                        minLen = Math.min(right - left +1, minLen);                        
+                    }
 
-                char leftCh = str.charAt(start++);
+                    char leftCh = s.charAt(left++);
+                    
 
-                map2.put(leftCh, map2.getOrDefault(leftCh, 0)-1);
+                    
+                        map.put(leftCh, map.get(leftCh)-1);
+                     
+                    
+                    if(map.get(leftCh) < freq.getOrDefault(leftCh, 0) ) {
+                        
+                        count--;
+                    }
+            
 
-                if(map2.get(leftCh) < map.getOrDefault(leftCh, 0)){
-                    matched--;
-                }
-                
-
+               
             }
 
-
+            right++;
         }
 
-        return minLen == Integer.MAX_VALUE  ? "" : str.substring(startIdx, startIdx+minLen);
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(startI, startI+minLen); 
     }
 }
