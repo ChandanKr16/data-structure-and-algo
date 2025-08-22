@@ -1,8 +1,5 @@
-// Last updated: 8/22/2025, 6:06:08 PM
+// Last updated: 8/22/2025, 6:29:46 PM
 class Solution {
-
-
-     
 
     public int subarraySum(int[] nums, int goal) {
         
@@ -12,11 +9,11 @@ class Solution {
         
         Map<Integer, Integer> freq = new HashMap<>(); // To store the frequency of prefix sums
 
+        freq.put(0, 1);
+
         for (int num : nums) {
             currentSum += num;
-            if (currentSum == goal){
-                totalCount++;
-            }
+            
 
             // Check if there is any prefix sum that can be subtracted from the current sum to get the desired goal
             if (freq.containsKey(currentSum - goal)){
