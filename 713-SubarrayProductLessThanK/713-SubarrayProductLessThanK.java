@@ -1,4 +1,4 @@
-// Last updated: 8/22/2025, 12:36:13 PM
+// Last updated: 8/22/2025, 2:02:04 PM
 class Solution {
 
     public int numSubarrayProductLessThanK(int[] nums, int k) {
@@ -14,17 +14,16 @@ class Solution {
             
             product *= nums[right];
 
-           // if(product < k){
-               
-            //}
+              
 
+         
             while(left <= right && product >= k){
                 product /= nums[left];
 
                 left++;
             }
-
-             count += (right - left + 1);
+            count += (right - left + 1);
+           
 
             right++;
 
