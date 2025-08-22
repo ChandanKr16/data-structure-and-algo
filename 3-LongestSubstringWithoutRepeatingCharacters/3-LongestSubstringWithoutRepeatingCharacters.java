@@ -1,4 +1,4 @@
-// Last updated: 8/22/2025, 8:59:58 PM
+// Last updated: 8/22/2025, 9:00:35 PM
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int maxLen = 0;
@@ -21,9 +21,9 @@ class Solution {
 
                 while(start < end && map.containsKey(ch)){
                     char leftCh = s.charAt(start++);
-                    map.put(leftCh, map.getOrDefault(leftCh, 0)-1);
+                    map.put(leftCh, map.get(leftCh)-1);
 
-                    if(map.getOrDefault(leftCh, 0) == 0) 
+                    if(map.get(leftCh) == 0) 
                         map.remove(leftCh);
                     len--;
                 }
