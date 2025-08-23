@@ -1,4 +1,4 @@
-// Last updated: 8/20/2025, 11:35:47 PM
+// Last updated: 8/23/2025, 8:30:05 AM
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
         int count = 0;
