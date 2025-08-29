@@ -1,57 +1,68 @@
-// Last updated: 8/29/2025, 9:10:02 AM
+// Last updated: 8/29/2025, 9:12:34 AM
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-
+        
         List<Integer> result = new ArrayList<>();
-
-        Map<Character, Integer> map = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+        Map<Character, Integer> pattern = new HashMap<>();
+        Map<Character, Integer> charFreq = new HashMap<>();
+        
+        int end = 0;
+        int start = 0;
+        int n  = s.length();
+        int count = 0;
 
         for(char ch : p.toCharArray()){
-            map.put(ch, map.getOrDefault(ch, 0)+1);            
+            pattern.put(ch, pattern.getOrDefault(ch, 0)+1);
         }
 
-        int matched = 0;
-        int start = 0;
-
-
-        for(int i = 0; i < s.length(); i++){
-
-            char ch = s.charAt(i);
-
+        while(end < n){
             
+            char ch = s.charAt(end);
 
-            if(map.containsKey(ch)){
-                map2.put(ch, map2.getOrDefault(ch, 0)+1);
+            charFreq.put(ch, charFreq.getOrDefault(ch, 0)+1);
+
+            if(!pattern.containsKey(ch)){
+                charFreq.clear();
+                count = 0;
+                start = end+1;
             }
+            else if(charFreq.get(ch).intValue() == pattern.getOrDefault(ch, 0).intValue()){
+                count++;
+            }
+            else{
+                while(charFreq.get(ch).intValue() > pattern.getOrDefault(ch, 0).intValue()){
+                    char startCh = s.charAt(start++);
+                    charFreq.put(startCh, charFreq.get(startCh)-1);
 
-            // if(map.containsKey(ch) && map2.get(ch).intValue() == map.get(ch).intValue()){
-            //     ++matched;
-            // }
-
-            
-            if(i >= p.length()-1){
-
-                char x = s.charAt(start);
-               
-
-                if(map.equals(map2)){
-                    result.add(start);
-                }
-
-                if(map.containsKey(x)){
-                     map2.put(x, map2.get(x)-1);
-                    if(map2.get(x) == 0) {
-                        map2.remove(x);
+                    if(pattern.containsKey(startCh) && charFreq.get(startCh) == 0){
+                        count--;
+                        charFreq.remove(startCh);
                     }
                 }
+            }
+           
 
-                start++;
-
+            if(charFreq.equals(pattern)){
+                result.add(end-p.length()+1);
+                
+                char startCh = s.charAt(start++);
+                
+                if(pattern.containsKey(startCh)){
+                    charFreq.put(startCh, charFreq.get(startCh)-1);
+                    count--;
+                    if(charFreq.get(startCh) == 0){
+                        charFreq.remove(startCh);
+                    }
+                }
             }
 
-        }
 
-        return result;       
+            end++;
+        }
+    
+
+        
+
+        return result;
     }
 }
