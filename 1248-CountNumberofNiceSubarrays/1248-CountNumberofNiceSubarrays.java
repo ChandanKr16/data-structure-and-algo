@@ -1,4 +1,4 @@
-// Last updated: 8/30/2025, 8:27:29 AM
+// Last updated: 8/30/2025, 8:27:43 AM
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
         int start = 0;
@@ -21,9 +21,9 @@ class Solution {
             if( map.containsKey(sum - k)){
                 result += map.get(sum-k);
             }
-            //if(nums[end] % 2 != 0){
-                map.put(sum,  map.getOrDefault(sum, 0)+1);
-           // }
+            
+            map.put(sum,  map.getOrDefault(sum, 0)+1);
+       
             end++;
         }
 
