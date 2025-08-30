@@ -1,26 +1,23 @@
-// Last updated: 7/27/2025, 6:12:52 PM
+// Last updated: 8/30/2025, 7:55:07 PM
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
         List<String> result = new ArrayList<>();
-
+        int start = 0;
         Map<String, Integer> map = new HashMap<>();
-
-
-        
+        Set<String> set = new HashSet<>();
 
         for(int i = 0; i <= s.length()-10; i++){
+            String substr = s.substring(start, i+10);  
 
-            String subString = s.substring(i, i+10);
+            map.put(substr, map.getOrDefault(substr, 0)+1);
 
-            map.put(subString, map.getOrDefault(subString, 0)+1);
-
-            if(map.get(subString) == 2){
-                result.add(subString);
-            }
-
-
+            if(map.get(substr) > 1){
+                set.add(substr);
+            } 
+            start++; 
         }
 
+        result.addAll(set);
 
         return result;
     }
