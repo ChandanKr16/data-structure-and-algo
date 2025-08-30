@@ -1,4 +1,4 @@
-// Last updated: 8/30/2025, 5:51:17 PM
+// Last updated: 8/30/2025, 5:53:22 PM
 class Solution {
     public int longestOnes(int[] nums, int k) {
         int start = 0;
@@ -10,16 +10,14 @@ class Solution {
 
         while(end < n){
 
-            if(nums[end] % 2 == 0){
-                zeroCount++;
-            }
-            else{
+            if(nums[end] == 1){
                 oneCount++;
             }
+            
 
-            if(end - start - oneCount + 1 <= k){
-                max = Math.max(max, end - start+1);
-            }
+          //  if(end - start - oneCount + 1 <= k){
+               
+           // }
 
             while(end - start - oneCount + 1 > k){
                 if(nums[start] == 1){
@@ -27,6 +25,8 @@ class Solution {
                 }
                 start++;
             }
+
+            max = Math.max(max, end - start+1);
 
             end++;
         }
