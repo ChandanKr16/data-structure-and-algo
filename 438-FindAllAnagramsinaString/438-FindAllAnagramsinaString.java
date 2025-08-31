@@ -1,68 +1,73 @@
-// Last updated: 8/29/2025, 9:12:34 AM
+// Last updated: 8/31/2025, 10:29:31 PM
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        
+
         List<Integer> result = new ArrayList<>();
-        Map<Character, Integer> pattern = new HashMap<>();
-        Map<Character, Integer> charFreq = new HashMap<>();
-        
-        int end = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
+
         int start = 0;
-        int n  = s.length();
+        int end = 0;
         int count = 0;
+        int n = s.length();
 
         for(char ch : p.toCharArray()){
-            pattern.put(ch, pattern.getOrDefault(ch, 0)+1);
+            map.put(ch, map.getOrDefault(ch, 0)+1);
         }
 
         while(end < n){
-            
+
             char ch = s.charAt(end);
 
-            charFreq.put(ch, charFreq.getOrDefault(ch, 0)+1);
+            map2.put(ch, map2.getOrDefault(ch, 0)+1);
 
-            if(!pattern.containsKey(ch)){
-                charFreq.clear();
-                count = 0;
-                start = end+1;
-            }
-            else if(charFreq.get(ch).intValue() == pattern.getOrDefault(ch, 0).intValue()){
+            if(map2.get(ch).intValue() == map.getOrDefault(ch, 0).intValue())
                 count++;
-            }
-            else{
-                while(charFreq.get(ch).intValue() > pattern.getOrDefault(ch, 0).intValue()){
-                    char startCh = s.charAt(start++);
-                    charFreq.put(startCh, charFreq.get(startCh)-1);
 
-                    if(pattern.containsKey(startCh) && charFreq.get(startCh) == 0){
-                        count--;
-                        charFreq.remove(startCh);
-                    }
-                }
+            if(!map.containsKey(ch)){
+                map2.clear();
+                start = end+1;
+                count = 0;
             }
-           
 
-            if(charFreq.equals(pattern)){
-                result.add(end-p.length()+1);
-                
+            if(map.equals(map2))
+                result.add(start);
+
+
+            while(count == map.size()){
                 char startCh = s.charAt(start++);
-                
-                if(pattern.containsKey(startCh)){
-                    charFreq.put(startCh, charFreq.get(startCh)-1);
+                map2.put(startCh, map2.get(startCh)-1);
+
+                if(map.containsKey(startCh))
                     count--;
-                    if(charFreq.get(startCh) == 0){
-                        charFreq.remove(startCh);
-                    }
-                }
+                  if(map2.get(startCh) == 0){
+                    map2.remove(startCh);
+                }     
             }
 
+            while(map2.getOrDefault(ch, 0).intValue() > map.getOrDefault(ch, 0).intValue()){
+                char startCh = s.charAt(start++);
+                map2.put(startCh, map2.get(startCh)-1); 
+                if(map2.get(startCh) == 0){
+                    map2.remove(startCh);
+                }
+
+                 if(map.containsKey(startCh)){
+                    count--;
+                }
+
+                if(map.equals(map2)){
+                 //System.out.println(map2);
+                 result.add(start);
+            }
+
+            }
+
+           
 
             end++;
         }
-    
 
-        
-
-        return result;
+        return result;              
     }
 }
