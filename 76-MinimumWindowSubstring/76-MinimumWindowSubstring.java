@@ -1,4 +1,4 @@
-// Last updated: 8/31/2025, 7:07:37 PM
+// Last updated: 8/31/2025, 7:08:06 PM
 class Solution {
     public String minWindow(String s, String t) {
 
@@ -34,7 +34,7 @@ class Solution {
 
                 freq2.put(startCh, freq2.get(startCh)-1);
 
-                if(freq.containsKey(startCh) && freq.getOrDefault(startCh, 0) > freq2.get(startCh))
+                if(freq.getOrDefault(startCh, 0) > freq2.get(startCh))
                     count--;
             }
 
