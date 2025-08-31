@@ -1,4 +1,4 @@
-// Last updated: 8/31/2025, 6:16:06 PM
+// Last updated: 8/31/2025, 6:17:07 PM
 class Solution {
     public int totalFruit(int[] fruits) {
         int maxCount = 0;
@@ -13,9 +13,9 @@ class Solution {
             count++;
             map.put(fruits[end], map.getOrDefault(fruits[end], 0)+1);
 
-            if(map.size() <= 2){
-                maxCount = Math.max(count, maxCount);
-            }
+           // if(map.size() <= 2){
+                
+            //}
 
             while(map.size() > 2){
 
@@ -26,6 +26,8 @@ class Solution {
                 start++;            
 
             }
+
+            maxCount = Math.max(count, maxCount);
 
             end++;
 
