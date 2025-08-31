@@ -1,50 +1,34 @@
-// Last updated: 8/31/2025, 1:49:31 PM
+// Last updated: 8/31/2025, 2:43:31 PM
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
 
-        Map<Character, Integer> map = new HashMap<>();
-        
-        for(int i = 0; i < s1.length(); i++){
-            map.put(s1.charAt(i), map.getOrDefault(s1.charAt(i), 0) + 1);
-        }     
-
-
-       int matched = 0;
+        int end = 0;
         int start = 0;
-        for(int i = 0; i < s2.length(); i++){
-            char ch = s2.charAt(i);
-            if(map.containsKey(ch)){
-                map.put(ch, map.get(ch) - 1);
+        Map<Character, Integer> pCount = new HashMap<>();
+        Map<Character, Integer> sCount = new HashMap<>();
 
-            if(map.get(ch) == 0){
-                matched++;
-            }
-            }
-
-
-            if(matched == map.size()) return true;
-            
-
-            if(i >= s1.length()-1){
-                char x = s2.charAt(start++);
-
-
-
-                if(map.containsKey(x)){
-                    
-                    if(map.get(x) == 0)
-                        matched--;
-
-                    map.put(x, map.get(x)+1);
-                }
-            }
-
-            
+        for(char ch : s1.toCharArray()){
+            pCount.put(ch, pCount.getOrDefault(ch, 0)+1);
         }
 
-       
+        while(end < s2.length()){
 
+            char ch = s2.charAt(end);
+            sCount.put(ch, sCount.getOrDefault(ch, 0)+1);
 
+            if(end - start + 1 > s1.length()){
+                char startCh = s2.charAt(start++);
+                sCount.put(startCh, sCount.get(startCh)-1);
+                if(sCount.get(startCh) == 0) 
+                    sCount.remove(startCh);
+            }
+
+             if(pCount.equals(sCount)) 
+                    return true;     
+           
+            end++;
+        }
+        
         return false;
     }
 }
