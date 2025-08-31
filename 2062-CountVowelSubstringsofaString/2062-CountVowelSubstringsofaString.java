@@ -1,4 +1,4 @@
-// Last updated: 8/31/2025, 7:23:39 AM
+// Last updated: 8/31/2025, 7:24:56 AM
 class Solution {
     
     private boolean isVowel(char ch){
@@ -11,9 +11,8 @@ class Solution {
 
         for(int i = 0; i < word.length(); i++){
             if(!isVowel(word.charAt(i))) continue;
-            set.clear();
-            set.add(word.charAt(i));
-            for(int j = i + 1; j < word.length(); j++){
+            set.clear();           
+            for(int j = i; j < word.length(); j++){
                 if(!isVowel(word.charAt(j))) break;
                 set.add(word.charAt(j));
 
