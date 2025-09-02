@@ -1,73 +1,45 @@
-// Last updated: 8/31/2025, 10:29:31 PM
+// Last updated: 9/2/2025, 10:10:31 PM
 class Solution {
+    
     public List<Integer> findAnagrams(String s, String p) {
+        int start = 0, end = 0, n = s.length(), count = 0;
 
         List<Integer> result = new ArrayList<>();
-        Map<Character, Integer> map = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+        Map<Character, Integer> pCount = new HashMap<>();
+        Map<Character, Integer> sCount = new HashMap<>();
 
-        int start = 0;
-        int end = 0;
-        int count = 0;
-        int n = s.length();
-
+        if(p.length() > s.length()) return result;
+        
         for(char ch : p.toCharArray()){
-            map.put(ch, map.getOrDefault(ch, 0)+1);
+            pCount.put(ch, pCount.getOrDefault(ch, 0)+1);
+        }
+
+        for(; end < p.length()-1; end++){
+            sCount.put(s.charAt(end), sCount.getOrDefault(s.charAt(end), 0)+1);
         }
 
         while(end < n){
-
             char ch = s.charAt(end);
 
-            map2.put(ch, map2.getOrDefault(ch, 0)+1);
+            sCount.put(ch, sCount.getOrDefault(ch, 0)+1);
 
-            if(map2.get(ch).intValue() == map.getOrDefault(ch, 0).intValue())
-                count++;
-
-            if(!map.containsKey(ch)){
-                map2.clear();
-                start = end+1;
-                count = 0;
-            }
-
-            if(map.equals(map2))
+            if(sCount.equals(pCount)){
                 result.add(start);
+            }
 
-
-            while(count == map.size()){
+            
+            while(end - start + 1 >= p.length()){
                 char startCh = s.charAt(start++);
-                map2.put(startCh, map2.get(startCh)-1);
+                sCount.put(startCh, sCount.get(startCh)-1);
 
-                if(map.containsKey(startCh))
-                    count--;
-                  if(map2.get(startCh) == 0){
-                    map2.remove(startCh);
-                }     
+                if(sCount.get(startCh) == 0)
+                    sCount.remove(startCh);
             }
-
-            while(map2.getOrDefault(ch, 0).intValue() > map.getOrDefault(ch, 0).intValue()){
-                char startCh = s.charAt(start++);
-                map2.put(startCh, map2.get(startCh)-1); 
-                if(map2.get(startCh) == 0){
-                    map2.remove(startCh);
-                }
-
-                 if(map.containsKey(startCh)){
-                    count--;
-                }
-
-                if(map.equals(map2)){
-                 //System.out.println(map2);
-                 result.add(start);
-            }
-
-            }
-
-           
 
             end++;
         }
 
-        return result;              
+
+        return result;        
     }
 }
