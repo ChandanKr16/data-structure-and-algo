@@ -1,51 +1,48 @@
-// Last updated: 8/31/2025, 7:08:06 PM
+// Last updated: 9/2/2025, 11:33:25 PM
 class Solution {
     public String minWindow(String s, String t) {
-
+        int start = 0, end = 0, startStrIdx = 0, len = Integer.MAX_VALUE, count = 0;
+        Map<Character, Integer> pattern = new HashMap<>();
         Map<Character, Integer> freq = new HashMap<>();
-        Map<Character, Integer> freq2 = new HashMap<>();
-        int start = 0;
-        int end = 0;
-        int n = s.length();
-        int minWindow = Integer.MAX_VALUE;
-        int startStrIdx = 0;
-        int count = 0;
 
         for(char ch : t.toCharArray()){
-            freq.put(ch, freq.getOrDefault(ch, 0)+1);
-        }       
-        
-        while(end < n){
+            pattern.put(ch, pattern.getOrDefault(ch, 0)+1);
+        }
+
+        while(end < s.length()){
+
             char ch = s.charAt(end);
             
-            freq2.put(ch, freq2.getOrDefault(ch, 0)+1);
+            freq.put(ch, freq.getOrDefault(ch, 0)+1);
 
-            if(freq.containsKey(ch) && freq2.get(ch).intValue() == freq.get(ch).intValue())
+            if(pattern.getOrDefault(ch, 0).intValue() == freq.get(ch).intValue()){
                 count++;
-            
-            while(count == freq.size()){
+            }
 
-                if(end - start + 1 < minWindow){
-                    minWindow = Math.min(minWindow, end - start+1);
+            while(count == pattern.size()){
+
+                if(end - start + 1 < len){
                     startStrIdx = start;
+                    len = end - start + 1;
                 }
 
                 char startCh = s.charAt(start++);
 
-                freq2.put(startCh, freq2.get(startCh)-1);
+                freq.put(startCh, freq.get(startCh)-1);
 
-                if(freq.getOrDefault(startCh, 0) > freq2.get(startCh))
-                    count--;
+                if(pattern.containsKey(startCh)){
+                    if(freq.get(startCh) < pattern.get(startCh))
+                        count--;
+                }
+
             }
 
             end++;
 
-
-
         }
 
-        return minWindow == Integer.MAX_VALUE ? "" : s.substring(startStrIdx, startStrIdx+minWindow);
 
-        
+
+        return len == Integer.MAX_VALUE ? "" : s.substring(startStrIdx, startStrIdx+len);
     }
 }
