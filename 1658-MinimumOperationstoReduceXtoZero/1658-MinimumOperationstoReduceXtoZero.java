@@ -1,9 +1,9 @@
-// Last updated: 9/4/2025, 8:22:02 PM
+// Last updated: 9/4/2025, 8:26:39 PM
 class Solution {
 
     public int minOperations(int[] nums, int x) {
         
-        int result = -1;
+      
 
         int sum = 0;
         for(int num : nums){
@@ -19,24 +19,26 @@ class Solution {
 
         int len = Integer.MIN_VALUE;
 
-        if(sum < x) return -1;
+        //if(sum < x) return -1;
 
-        while(end < nums.length && start < nums.length){
+        while(end < nums.length){
 
             
             subSum += nums[end];
 
-            while(start < nums.length && subSum >= find){
-                if(subSum == find)
-                    len = Math.max(len, end - start + 1);
+            while(start <= end && subSum > find){
+                
                 subSum -= nums[start++];
             }
+
+            if(subSum == find)
+                    len = Math.max(len, end - start + 1);
 
             end++;
 
         }
 
-        if(find == 0 && len == Integer.MIN_VALUE) return 1;
+       
 
         return len == Integer.MIN_VALUE ? -1 : nums.length - len;
     }
