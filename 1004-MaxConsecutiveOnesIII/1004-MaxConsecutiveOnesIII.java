@@ -1,36 +1,30 @@
-// Last updated: 8/30/2025, 5:53:22 PM
+// Last updated: 9/4/2025, 7:48:25 AM
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        int start = 0;
-        int end = 0;
-        int n = nums.length;
-        int max = 0;
-        int zeroCount = 0;
+        int maxLen = 0, start = 0, end = 0, n = nums.length;
         int oneCount = 0;
+        Map<Integer, Integer> map = new HashMap<>();
 
         while(end < n){
 
-            if(nums[end] == 1){
-                oneCount++;
-            }
+            map.put(nums[end], map.getOrDefault(nums[end], 0)+1);
+
+            if(nums[end] == 1) oneCount++;
+
             
-
-          //  if(end - start - oneCount + 1 <= k){
-               
-           // }
-
-            while(end - start - oneCount + 1 > k){
-                if(nums[start] == 1){
-                    --oneCount;
-                }
-                start++;
+            while(start < n && end - start - oneCount + 1 > k){
+                int startNum = nums[start++];
+                if(startNum == 1) 
+                    oneCount--;
             }
 
-            max = Math.max(max, end - start+1);
+            maxLen = Math.max(maxLen, end - start + 1);
 
             end++;
+
         }
 
-        return max;
+
+        return maxLen;
     }
 }
