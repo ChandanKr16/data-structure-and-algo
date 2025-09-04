@@ -1,53 +1,43 @@
-// Last updated: 9/4/2025, 10:37:39 AM
+// Last updated: 9/4/2025, 8:22:02 PM
 class Solution {
+
     public int minOperations(int[] nums, int x) {
-        int result = Integer.MAX_VALUE;
+        
+        int result = -1;
 
-        int prefix[] = new int[nums.length];
-        int suffix[] = new int[nums.length];
-
-        prefix[0] = nums[0];
-
-        for(int i = 1; i < prefix.length; i++){
-            prefix[i] = prefix[i-1] + nums[i];
+        int sum = 0;
+        for(int num : nums){
+            sum += num;
         }
 
-        suffix[nums.length-1] = nums[nums.length-1];
+        int find = sum - x;
 
-        for(int i = nums.length-2; i >= 0; i--){
-            suffix[i] = nums[i] + suffix[i+1];
-        }
+        int start = 0;
+        int end = 0;
 
-        Map<Integer, Integer> map = new HashMap<>();
-        Map<Integer, Integer> map2 = new HashMap<>();
+        int subSum = 0;
 
-        for(int i = 0; i < prefix.length; i++){
-            map.put(prefix[i], i);
-            map2.put(suffix[i], i);
-        }
+        int len = Integer.MIN_VALUE;
 
+        if(sum < x) return -1;
 
-        if(map.containsKey(x)) {
-            result = Math.min(result, map.get(x));
-            result++;
-        }
+        while(end < nums.length && start < nums.length){
 
-        if(map2.containsKey(x)){
-            result = Math.min(result, nums.length - map2.get(x));
-        }
+            
+            subSum += nums[end];
 
-        if(x > prefix[prefix.length-1]) return -1;
-
-
-        for(int i = suffix.length-1; i >= 0; i--){
-            int find = x - suffix[i];
-
-            if(map.containsKey(find)){
-                result = Math.min(result, nums.length-i+map.get(find)+1);
+            while(start < nums.length && subSum >= find){
+                if(subSum == find)
+                    len = Math.max(len, end - start + 1);
+                subSum -= nums[start++];
             }
 
+            end++;
+
         }
 
-        return result == Integer.MAX_VALUE ? -1 : result;
+        if(find == 0 && len == Integer.MIN_VALUE) return 1;
+
+        return len == Integer.MIN_VALUE ? -1 : nums.length - len;
     }
 }
