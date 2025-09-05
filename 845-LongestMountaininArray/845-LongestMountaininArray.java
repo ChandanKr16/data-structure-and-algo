@@ -1,26 +1,26 @@
-// Last updated: 8/19/2025, 7:44:48 AM
+// Last updated: 9/5/2025, 11:15:30 AM
 class Solution {
     public int longestMountain(int[] arr) {
-
-        int max = 0;
-
-        if(arr.length < 3) return 0;
+        int maxLen = 0;
 
         for(int i = 1; i < arr.length-1; i++){
-            
-            if(arr[i-1] < arr[i] && arr[i] > arr[i+1]){
+            int left = i;
+            int right = i;
 
-                int left = i;
-                int right = i;
+            if(arr[left-1] < arr[left] && arr[right] > arr[right+1]){
+                while(left > 0 && arr[left-1] < arr[left])
+                    left--;
 
-                while(left > 0 && arr[left] > arr[left-1]) left--;
-                while(right < arr.length-1 && arr[right] > arr[right+1]) right++;
-
-                max = Math.max(max, right-left+1);
-
+                while(right < arr.length-1 && arr[right] > arr[right+1])
+                    right++;
+                maxLen = Math.max(maxLen, right - left+1);
             }
+
+
+            
         }
 
-        return max;
+
+        return maxLen ;
     }
 }
