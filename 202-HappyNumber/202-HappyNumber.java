@@ -1,31 +1,28 @@
-// Last updated: 9/5/2025, 8:01:19 PM
+// Last updated: 9/5/2025, 8:05:25 PM
 class Solution {
     public boolean isHappy(int n) {
+        Set<Integer> visit = new HashSet<>();
         
-        if(n == 1) return true;
-
-        int prev = 0, sq = 0;
-
-        Set<Integer> set = new HashSet<>();
-
-        while(true){
-
-            int temp = n;
-            sq = 0;
-
-            while(temp > 0){
-                sq = sq + (temp % 10) * (temp % 10);
-                temp = temp / 10;
+        while (!visit.contains(n)) {
+            visit.add(n);
+            n = getNextNumber(n);
+            if (n == 1) {
+                return true;
             }
+        }
+        
+        return false;
+    }
 
-            if(sq == 1) return true;
-
-            if(set.contains(sq)) return false;
-
-            set.add(sq);
-
-            n = sq;
-
-        } 
+    private int getNextNumber(int n) {
+        int output = 0;
+        
+        while (n > 0) {
+            int digit = n % 10;
+            output += digit * digit;
+            n = n / 10;
+        }
+        
+        return output;
     }
 }
