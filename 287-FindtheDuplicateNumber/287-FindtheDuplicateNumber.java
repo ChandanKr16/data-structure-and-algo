@@ -1,8 +1,8 @@
-// Last updated: 9/5/2025, 8:09:59 PM
+// Last updated: 9/5/2025, 8:25:52 PM
 class Solution {
     public int findDuplicate(int[] nums) {
 
-        if(nums.length == 1) return nums[0];
+      //  if(nums.length == 1) return nums[0];
 
         Arrays.sort(nums);
 
