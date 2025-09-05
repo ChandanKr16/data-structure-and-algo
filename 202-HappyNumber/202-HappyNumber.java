@@ -1,4 +1,4 @@
-// Last updated: 9/5/2025, 7:58:51 PM
+// Last updated: 9/5/2025, 8:01:19 PM
 class Solution {
     public boolean isHappy(int n) {
         
@@ -27,7 +27,5 @@ class Solution {
             n = sq;
 
         } 
-
-        //return false;
     }
 }
