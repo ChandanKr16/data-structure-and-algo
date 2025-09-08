@@ -1,4 +1,4 @@
-// Last updated: 9/8/2025, 9:03:46 AM
+// Last updated: 9/8/2025, 9:09:59 AM
 class Solution {
     public boolean isValid(String s) {
 
@@ -19,7 +19,12 @@ class Solution {
             if(ch == '{' || ch == '(' || ch == '[')
                 stack.push(ch);
             else if(ch == '}' || ch == ')' || ch == ']'){
-                if(stack.isEmpty() || stack.peek() != map.get(ch)) return false;
+                if(stack.isEmpty()) 
+                    return false;
+                else if(ch == ')' && stack.peek() != '(') return false;
+                else if(ch == '}' && stack.peek() != '{') return false;
+                else if(ch == ']' && stack.peek() != '[') return false;
+
                 stack.pop();
             }          
           
