@@ -1,4 +1,4 @@
-// Last updated: 9/8/2025, 10:26:07 PM
+// Last updated: 9/8/2025, 10:29:44 PM
 class Solution {
     public int minAddToMakeValid(String s) {
         
@@ -6,18 +6,14 @@ class Solution {
 
         Stack<Character> stack = new Stack<>();
 
-        Map<Character, Character> map = new HashMap<>();
-        map.put(')', '(');
-        map.put(']', '[');
-        map.put('}', '{');
-
+       
         for(char ch : s.toCharArray()){
 
-            if(ch == '(' || ch == '[' || ch == '{')
+            if(ch == '(')
                 stack.push(ch);
-            else if(ch == ')' || ch == ']' || ch == '}'){
+            else if(ch == ')'){
 
-                if(stack.isEmpty() || map.get(ch) != stack.peek()){
+                if(stack.isEmpty() || '(' != stack.peek()){
                     count++;
                 }
                 else {
