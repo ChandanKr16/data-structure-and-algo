@@ -1,4 +1,4 @@
-// Last updated: 9/8/2025, 10:29:44 PM
+// Last updated: 9/8/2025, 10:42:05 PM
 class Solution {
     public int minAddToMakeValid(String s) {
         
@@ -13,7 +13,7 @@ class Solution {
                 stack.push(ch);
             else if(ch == ')'){
 
-                if(stack.isEmpty() || '(' != stack.peek()){
+                if(stack.isEmpty()){
                     count++;
                 }
                 else {
