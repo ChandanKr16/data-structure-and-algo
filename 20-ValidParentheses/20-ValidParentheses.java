@@ -1,4 +1,4 @@
-// Last updated: 9/8/2025, 9:03:24 AM
+// Last updated: 9/8/2025, 9:03:34 AM
 class Solution {
     public boolean isValid(String s) {
 
@@ -11,8 +11,8 @@ class Solution {
 
         
 
-        if(s.length() % 2 != 0) 
-            return false;
+        // if(s.length() % 2 != 0) 
+        //     return false;
 
         for(char ch : s.toCharArray()){
 
