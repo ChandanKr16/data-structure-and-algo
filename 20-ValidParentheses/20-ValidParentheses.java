@@ -1,13 +1,13 @@
-// Last updated: 9/8/2025, 9:09:59 AM
+// Last updated: 9/8/2025, 9:10:07 AM
 class Solution {
     public boolean isValid(String s) {
 
         Stack<Character> stack = new Stack<>();
 
-        Map<Character, Character> map = new HashMap<>();
-        map.put('}', '{');
-        map.put(')', '(');
-        map.put(']', '[');
+        // Map<Character, Character> map = new HashMap<>();
+        // map.put('}', '{');
+        // map.put(')', '(');
+        // map.put(']', '[');
 
         
 
