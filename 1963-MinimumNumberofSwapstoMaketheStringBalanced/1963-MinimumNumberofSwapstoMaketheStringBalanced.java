@@ -1,4 +1,4 @@
-// Last updated: 9/11/2025, 9:16:27 PM
+// Last updated: 9/11/2025, 9:31:59 PM
 class Solution {
     public int minSwaps(String s) {
         int swapCounter = 0;
@@ -21,6 +21,6 @@ class Solution {
         }
     
 
-        return (int)Math.ceil((swapCounter+1)/2);
+        return (swapCounter+1)/2;
     }
 }
